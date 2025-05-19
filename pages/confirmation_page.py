@@ -1,0 +1,8 @@
+from selenium.webdriver.common.by import By
+from .base_page import BasePage
+
+class ConfirmationPage(BasePage):
+    MODAL_HEADER = (By.CLASS_NAME, "Order_ModalHeader__3FDaJ")
+
+    def is_order_confirmed(self):
+        return "Заказ оформлен" in self.driver.find_element(*self.MODAL_HEADER).text
