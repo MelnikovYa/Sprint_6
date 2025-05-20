@@ -49,3 +49,16 @@ class OrderPage(BasePage):
         confirm_btn = self.wait_for_clickable(self.CONFIRM_BUTTON, timeout=20)
         self.scroll_to(confirm_btn)
         confirm_btn.click()
+
+    @allure.step("Открываем форму заказа по кнопке {position}")
+    def click_order_button(self, position="header"):
+        if position == "header":
+            locator = self.ORDER_BUTTON_HEADER
+        elif position == "bottom":
+            locator = self.ORDER_BUTTON_BOTTOM
+        else:
+            raise ValueError(f"Неизвестная позиция кнопки: {position}")
+
+        element = self.wait_for_presence(locator)
+        self.scroll_to(element)
+        self.wait_for_clickable(locator).click()

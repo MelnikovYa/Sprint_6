@@ -62,3 +62,7 @@ class BasePage:
     @allure.step("Ожидание, пока URL будет содержать подстроку '{substring}'")
     def wait_for_url_to_contain(self, substring, timeout=10):
         WebDriverWait(self.driver, timeout).until(lambda d: substring in d.current_url)
+
+    @allure.step("Получаем текущий URL страницы")
+    def get_current_url(self):
+        return self.driver.current_url

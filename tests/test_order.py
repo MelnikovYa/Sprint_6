@@ -1,6 +1,4 @@
-# tests/test_order.py
 import pytest
-from selenium.webdriver.common.by import By
 from pages.main_page import MainPage
 from pages.order_page import OrderPage
 from pages.confirmation_page import ConfirmationPage
@@ -9,11 +7,8 @@ from config import BASE_URL
 
 class TestOrder:
 
-    @pytest.mark.parametrize("button_locator", [
-        OrderPage.ORDER_BUTTON_HEADER,
-        OrderPage.ORDER_BUTTON_BOTTOM,
-    ])
-    def test_order_button_opens_form(self, driver, button_locator):
+    @pytest.mark.parametrize("position", ["header", "bottom"])
+    def test_order_button_opens_form(self, driver, position):
         main_page = MainPage(driver)
         order_page = OrderPage(driver)
         cookie = CookieHandler(driver)
@@ -21,9 +16,7 @@ class TestOrder:
         main_page.open(BASE_URL)
         cookie.close_cookie_banner()
 
-        element = order_page.wait_for_presence(button_locator)
-        order_page.scroll_to(element)
-        order_page.wait_for_clickable(button_locator).click()
+        order_page.click_order_button(position)
 
         assert order_page.is_element_displayed(OrderPage.NAME_INPUT)
 
@@ -40,7 +33,7 @@ class TestOrder:
         main_page.open(BASE_URL)
         cookie.close_cookie_banner()
 
-        order_page.wait_for_clickable(OrderPage.ORDER_BUTTON_HEADER).click()
+        order_page.click_order_button()
 
         order_page.fill_first_form(name, surname, address, phone)
         order_page.fill_second_form(comment)
