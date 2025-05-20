@@ -62,3 +62,7 @@ class OrderPage(BasePage):
         element = self.wait_for_presence(locator)
         self.scroll_to(element)
         self.wait_for_clickable(locator).click()
+
+    @allure.step("Проверка: форма заказа отображается")
+    def is_order_form_displayed(self):
+        return self.is_element_displayed(self.NAME_INPUT)

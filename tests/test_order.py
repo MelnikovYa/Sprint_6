@@ -18,7 +18,7 @@ class TestOrder:
 
         order_page.click_order_button(position)
 
-        assert order_page.is_element_displayed(OrderPage.NAME_INPUT)
+        assert order_page.is_order_form_displayed()
 
     @pytest.mark.parametrize("name, surname, address, phone, comment", [
         ("Тест", "Тестов", "Тест, ул. Тестовая, д.9", "89994815162", "Кот домофона"),

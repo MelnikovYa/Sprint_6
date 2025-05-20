@@ -13,7 +13,7 @@ class TestLogos:
         cookie.close_cookie_banner()
         page.click_scooter_logo()
 
-        assert page.get_current_url().startswith(BASE_URL)
+        assert page.is_on_main_page()
 
     def test_click_yandex_logo_redirects_to_dzen(self, driver):
         page = MainPage(driver)
@@ -28,4 +28,4 @@ class TestLogos:
         page.switch_to_new_window(original_window)
         page.wait_for_url_to_contain("dzen.ru")
 
-        assert page.current_url_contains("dzen.ru")
+        assert page.is_on_dzen_page()

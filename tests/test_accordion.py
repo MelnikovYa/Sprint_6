@@ -14,5 +14,4 @@ class TestAccordion:
         cookie.close_cookie_banner()
 
         page.click_question(index)
-        answer = page.get_answer_text(index)
-        assert answer != ""
+        assert page.is_answer_displayed(index)
